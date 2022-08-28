@@ -27,5 +27,16 @@ function onImageGalleryClick(e) {
     return;
   }
 
-  const originalImageLink = e.target.dataset.source;
+  const instance = basicLightbox.create(`<img src=${e.target.dataset.source}>`);
+
+  instance.show();
+
+  if (instance.visible()) {
+    galleryEl.addEventListener("keydown", (e) => {
+      if (e.code !== "Escape") {
+        return;
+      }
+      instance.close();
+    });
+  }
 }
